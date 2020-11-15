@@ -1,7 +1,9 @@
 [gd_resource type="AudioBusLayout" load_steps=2 format=2]
 
-[sub_resource type="AudioEffectSpectrumAnalyzer" id=1]
-resource_name = "SpectrumAnalyzer"
+[sub_resource type="AudioEffectDelay" id=1]
+resource_name = "Delay"
+tap1/delay_ms = 1500.0
+feedback/active = true
 
 [resource]
 bus/0/effect/0/effect = SubResource( 1 )

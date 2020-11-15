@@ -5,19 +5,16 @@ var r = RandomNumberGenerator.new()
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	r.randomize()
+
+
+func playNote():
+	var pitch = r.randf_range(0.0, 4.0)
 	var note = Note.instance()
-	note.bus = 1
 	note.r = r
-	add_child(note)
-	
-	var note2 = Note.instance()
-	note2.bus = 2
-	note2.r = r
-	add_child(note2)
+	note.pitch = pitch
+	#add_child(note)
+	call_deferred("add_child", note)
 
-	
-	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _input(event):
+	if event is InputEventMouseButton && event.is_pressed():
+		playNote()
