@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Main.gd" type="Script" id=1]
+[ext_resource path="res://Note.tscn" type="PackedScene" id=2]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+Note = ExtResource( 2 )
+
+[node name="World" type="Spatial" parent="."]
+
+[node name="Camera" type="Camera" parent="World"]
+transform = Transform( 0.792375, 0, -0.610034, 0, 1, 0, 0.610034, 0, 0.792375, -2.68666, 1.98552, 4.00097 )
