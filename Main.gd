@@ -8,7 +8,8 @@ func _ready():
 
 
 func playNote():
-	var pitch = r.randf_range(0.0, 4.0)
+	var pitch = r.randf_range(1.0, 4.0)
+	
 	var note = Note.instance()
 	note.r = r
 	note.pitch = pitch
