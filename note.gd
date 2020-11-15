@@ -7,8 +7,10 @@ var pitch
 var bus
 var player
 
-func _ready():
+func _ready():	
 	shape = CSGSphere.new()
+	var material = SpatialMaterial.new()
+	shape.material = material
 	player = AudioStreamPlayer3D.new()
 	AudioServer.lock()
 	AudioServer.add_bus()
@@ -46,8 +48,9 @@ func on_finished():
 	queue_free()
 
 func _process(_delta):
-	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)
+	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)	
 	if magnitude.x > 0:
 		shape.radius = magnitude.x * 1000 * _delta
-		shape.translate(Vector3(player.get_playback_position() * _delta, 0, 0))
+		shape.material.albedo_color = Color(magnitude.y * 100, 0, magnitude.x * 100, 1)		
+		shape.translate(Vector3(player.get_playback_position() * _delta / 2, 0, 0))
 	
