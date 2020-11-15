@@ -5,10 +5,12 @@ var spectrum
 var r
 var pitch
 var bus
+var player
 
 func _ready():
 	shape = CSGSphere.new()
-	var player = AudioStreamPlayer3D.new()
+	player = AudioStreamPlayer3D.new()
+	AudioServer.lock()
 	AudioServer.add_bus()
 	bus = AudioServer.bus_count - 1
 	# Add a new bus just for this note
@@ -21,6 +23,7 @@ func _ready():
 	
 	# Get the effect we just added
 	spectrum = AudioServer.get_bus_effect_instance(bus, 0)
+	AudioServer.unlock()
 	
 	# Tell the player to play a sound on our new bus
 	player.bus = name
@@ -36,12 +39,15 @@ func _ready():
 	player.play()
 	
 func on_finished():
-	print("Finished")
+	print("Finished %s" % (bus))
+	AudioServer.lock()
 	AudioServer.remove_bus(bus)
+	AudioServer.unlock()
 	queue_free()
 
 func _process(_delta):
 	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)
 	if magnitude.x > 0:
 		shape.radius = magnitude.x * 1000 * _delta
+		shape.translate(Vector3(player.get_playback_position() * _delta, 0, 0))
 	
