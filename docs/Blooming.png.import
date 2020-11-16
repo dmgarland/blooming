@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Blooming.png-093165bede31d22ee58497be07874df4.stex"
+path="res://.import/Blooming.png-aaca9fec4c21963bc093aa09a0cba98a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://build/Blooming.png"
-dest_files=[ "res://.import/Blooming.png-093165bede31d22ee58497be07874df4.stex" ]
+source_file="res://docs/Blooming.png"
+dest_files=[ "res://.import/Blooming.png-aaca9fec4c21963bc093aa09a0cba98a.stex" ]
 
 [params]
 
