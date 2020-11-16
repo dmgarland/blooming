@@ -8,7 +8,7 @@ func _ready():
 
 
 func playNote():
-	var pitch = r.randf_range(1.0, 4.0)
+	var pitch = r.randf_range(1.0, 3.0)
 	
 	var note = Note.instance()
 	note.r = r
@@ -19,3 +19,6 @@ func playNote():
 func _input(event):
 	if event is InputEventMouseButton && event.is_pressed():
 		playNote()
+	if event is InputEventMouseMotion:
+		$World/Camera.rotate_y(deg2rad(event.relative.x) * 0.5)
+
