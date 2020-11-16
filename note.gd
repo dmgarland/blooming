@@ -7,7 +7,8 @@ var pitch
 var bus
 var player
 var distance = 0
-var samples = ['res://bowed.wav', 'res://pike.wav', 'res://glasswell.wav']
+var samples = ['res://bowed.wav', 'res://bell.wav', 'res://bass.wav']
+var index
 
 func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
@@ -33,9 +34,10 @@ func _ready():
 	
 	# Tell the player to play a sound on our new bus
 	player.bus = name
-	player.stream = load(samples[randi() % samples.size()])	
+	#player.stream = load(samples[randi() % samples.size()])	
+	player.stream = load(samples[clamp(index - 1, 0, samples.size() - 1)])
 	player.pitch_scale = pitch
-	shape.translate(Vector3(pitch, pitch, pitch))
+	shape.translate(Vector3(pitch, pitch, pitch * 2))
 	
 	player.connect("finished", self, "on_finished")
 	
