@@ -2,7 +2,9 @@
 
 Inspired by Brian Eno and Peter Chilvers [Bloom](https://apps.apple.com/us/app/bloom/id292792586) app, this is an experimental, basic 3D version using [Godot](https://godotengine.org/) engine.
 
-**[Demo](https://dmgarland.github.io/blooming/)**
+**[Click here to try the demo](https://dmgarland.github.io/blooming/)**
+
+![Screenshot with some visible notes](screenshots/demo.png)
 
 ## How to use
 
