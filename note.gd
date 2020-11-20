@@ -9,10 +9,15 @@ var player
 var distance = 0
 var samples = ['res://bowed.wav', 'res://bell.wav', 'res://bass.wav']
 var index
+var targetRadius = 0
+var targetColour = Color(0, 0, 0, 1)
+var timer
 
 func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
 	shape = CSGSphere.new()
+	shape.rings = 8
+	shape.radial_segments = 16
 	var material = SpatialMaterial.new()
 	shape.material = material
 	player = AudioStreamPlayer3D.new()
@@ -41,6 +46,13 @@ func _ready():
 	
 	player.connect("finished", self, "on_finished")
 	
+	# Sample the sound every 50ms
+	timer = Timer.new()
+	timer.wait_time = 0.05
+	timer.autostart = true
+	timer.connect("timeout", self, "measureFrequencies")
+	self.add_child(timer)
+	
 	# Add everything to the scene
 	self.add_child(shape)
 	shape.add_child(player)
@@ -53,18 +65,35 @@ func on_finished():
 	distance = 0
 	player.pitch_scale += pitch_adjustment
 	player.play()
-
-func _process(_delta):
+	
+func measureFrequencies():
 	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)
 	var bass = spectrum.get_magnitude_for_frequency_range(20, 1000)
 	var mid = spectrum.get_magnitude_for_frequency_range(1001, 4000)
 	var top = spectrum.get_magnitude_for_frequency_range(4001, 20000)
+	targetRadius = magnitude.x * 100	
+	targetColour = Color(bass.x * 100.0, mid.x * 100.0, top.x * 100.0, 0.7)
 	
-	if magnitude.x > 0:
-		shape.radius = magnitude.x * 1000 * _delta
-		shape.material.albedo_color = Color(bass.x * 100.0, mid.x * 100.0, top.x * 100.0, 0.7)		
-		var offset = player.get_playback_position() * _delta / 2
-		distance += offset
-		
-		shape.translate(Vector3(offset, 0, 0))
+func setColour():	
+	var ir = (targetColour.r - shape.material.albedo_color.r) * 0.2 + shape.material.albedo_color.r
+	var ig = (targetColour.g - shape.material.albedo_color.g) * 0.2 + shape.material.albedo_color.g
+	var ib = (targetColour.b - shape.material.albedo_color.b) * 0.2 + shape.material.albedo_color.b
+	shape.material.albedo_color = Color(ir, ig, ib, 0.7)
+	
+func setPosition(delta):
+	var offset = player.get_playback_position() * delta / 2
+	distance += offset	
+	shape.translate(Vector3(offset, 0, 0))
+	
+func setRadius():
+	var interpolator = (targetRadius - shape.radius) * 0.2 + shape.radius	
+	if interpolator > 0:
+		shape.radius = interpolator
+	
+func _process(delta):	
+	setColour()		
+	setPosition(delta)
+	setRadius()
+	
+	
 	
