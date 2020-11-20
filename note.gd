@@ -69,8 +69,8 @@ func on_finished():
 func measureFrequencies():
 	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)
 	var bass = spectrum.get_magnitude_for_frequency_range(20, 1000)
-	var mid = spectrum.get_magnitude_for_frequency_range(1001, 4000)
-	var top = spectrum.get_magnitude_for_frequency_range(4001, 20000)
+	var mid = spectrum.get_magnitude_for_frequency_range(1001, 2000)
+	var top = spectrum.get_magnitude_for_frequency_range(2001, 20000)	
 	targetRadius = magnitude.x * 100	
 	targetColour = Color(bass.x * 100.0, mid.x * 100.0, top.x * 100.0, 0.7)
 	

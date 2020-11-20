@@ -10,4 +10,4 @@ Note = ExtResource( 2 )
 [node name="World" type="Spatial" parent="."]
 
 [node name="Camera" type="Camera" parent="World"]
-transform = Transform( 0.994149, 0, -0.108016, 0, 1, 0, 0.108016, 0, 0.994149, 5.42208, 1.98552, 14.0914 )
+transform = Transform( 1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, 5.42208, 1.98552, 14.0684 )

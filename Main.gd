@@ -14,7 +14,7 @@ func _ready():
 
 func playNote(index):
 	notes += 1
-	var randPitch = r.randf_range(-2.0, 2.0)
+	var randPitch = r.randf_range(-1.5, 1.5)
 	
 	var note = Note.instance()
 	note.r = r
@@ -33,7 +33,7 @@ func _input(event):
 		if newAngle > -60 and newAngle < 60:
 			cameraAngle += offset			
 			$World/Camera.rotate_x(deg2rad(offset))
-		basePitch = (((get_viewport().size.y - get_viewport().get_mouse_position().y) / get_viewport().size.y) - 0.5) * 15		
+		basePitch = (((get_viewport().size.y - get_viewport().get_mouse_position().y) / get_viewport().size.y) - 0.5) * 10
 		
 	if event is InputEventKey and event.pressed:
 		match event.scancode:
