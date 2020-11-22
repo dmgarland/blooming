@@ -1,13 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Note.tscn" type="PackedScene" id=2]
+[ext_resource path="res://OQ_Toolkit/OQ_RightController.tscn" type="PackedScene" id=3]
+[ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=4]
+[ext_resource path="res://OQ_Toolkit/OQ_ARVRCamera.tscn" type="PackedScene" id=5]
+[ext_resource path="res://OQ_Toolkit/OQ_ARVROrigin.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
 Note = ExtResource( 2 )
 
-[node name="World" type="Spatial" parent="."]
+[node name="OQ_ARVROrigin" parent="." instance=ExtResource( 6 )]
 
-[node name="Camera" type="Camera" parent="World"]
-transform = Transform( 1, 0, 0, 0, 0.951057, -0.309017, 0, 0.309017, 0.951057, 5.42208, 1.98552, 14.0684 )
+[node name="OQ_ARVRCamera" parent="OQ_ARVROrigin" instance=ExtResource( 5 )]
+
+[node name="OQ_LeftController" parent="OQ_ARVROrigin" instance=ExtResource( 4 )]
+
+[node name="OQ_RightController" parent="OQ_ARVROrigin" instance=ExtResource( 3 )]

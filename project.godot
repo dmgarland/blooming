@@ -8,9 +8,20 @@
 
 config_version=4
 
-_global_script_classes=[  ]
+_global_script_classes=[ {
+"base": "Spatial",
+"class": "Feature_RigidBodyGrab",
+"language": "GDScript",
+"path": "res://OQ_Toolkit/OQ_ARVRController/scripts/Feature_RigidBodyGrab.gd"
+}, {
+"base": "RigidBody",
+"class": "OQClass_GrabbableRigidBody",
+"language": "GDScript",
+"path": "res://OQ_Toolkit/OQ_Classes/OQClass_GrabbableRigidBody.gd"
+} ]
 _global_script_class_icons={
-
+"Feature_RigidBodyGrab": "",
+"OQClass_GrabbableRigidBody": ""
 }
 
 [application]
@@ -18,6 +29,14 @@ _global_script_class_icons={
 config/name="Blooming"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon-16.icns"
+
+[autoload]
+
+vr="*res://OQ_Toolkit/vr_autoload.gd"
+
+[gdnative]
+
+singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 
 [rendering]
 
