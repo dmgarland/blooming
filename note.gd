@@ -13,6 +13,7 @@ var targetRadius = 0
 var targetColour = Color(0, 0, 0, 1)
 var timer
 var origin: Vector3 = Vector3(0,0,0);
+var sample;
 
 func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
@@ -42,7 +43,8 @@ func _ready():
 	# Tell the player to play a sound on our new bus
 	player.bus = name
 	#player.stream = load(samples[randi() % samples.size()])	
-	player.stream = load(samples[clamp(index - 1, 0, samples.size() - 1)])
+	#player.stream = load(samples[clamp(index - 1, 0, samples.size() - 1)])
+	player.stream = load(sample)
 	player.pitch_scale = pitch	
 	shape.translate(Vector3(origin.x + pitch, origin.y + pitch, origin.z + pitch * 2))
 	

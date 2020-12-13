@@ -19,6 +19,11 @@ func _ready():
 	connectCollider($OQ_ARVROrigin/OQ_LeftController/Collide)
 	connectCollider($OQ_ARVROrigin/OQ_RightController/Collide)
 	helix  = $OQ_ARVROrigin/Helix
+	setDefaults()
+	
+func setDefaults():
+	$OQ_ARVROrigin/OQ_LeftController.sound = 'res://bowed.wav'
+	$OQ_ARVROrigin/OQ_RightController.sound = 'res://bell.wav'
 	
 func connectCollider(c):
 	c.connect("oq_collision_started", self, "handleCollideStart")
@@ -29,18 +34,18 @@ var noteOn = false
 var note = null;
 
 func handleCollideStart(with, controller):
-	note = playNote(getPitchFor(controller), controller.translation)
+	note = playNote(getPitchFor(controller), controller.translation, controller.sound)
 	
-func handleColliding(with, controller):
+func handleColliding(with, body):
 	if(note):
-		note.player.pitch_scale = getPitchFor(controller)
+		note.player.pitch_scale = getPitchFor(body)
 		
 func handleCollideEnd(with, controller):
 	pass
 	#if(note):
 	#	remove_child(note)
 	
-func playNote(pitch, origin):
+func playNote(pitch, origin, sound):
 	notes += 1
 	var randPitch = r.randf_range(-1.5, 1.5)
 	var note = Note.instance()
@@ -48,13 +53,14 @@ func playNote(pitch, origin):
 	note.pitch = pitch
 	note.index = notes
 	note.origin = origin
+	note.sample = sound
 	call_deferred("add_child", note)
 	return note
 	
-func getPitchFor(controller):
-	var x = controller.translation.x
-	var y = controller.translation.y
-	var z = controller.translation.z		
+func getPitchFor(body):
+	var x = body.translation.x
+	var y = body.translation.y
+	var z = body.translation.z		
 	if x != 0:
 		var angle = atan2(z, x)
 		if origin.z > z:
@@ -63,11 +69,8 @@ func getPitchFor(controller):
 		var rely = y - helix.translation.y	
 		var total_radians = OCTAVES * 2 * PI
 		var octave = (rely / SPIRAL_HEIGHT) 
-		var circular_distance = octave * total_radians
-		#var octave = floor((rely) / OCTAVE_HEIGHT)				
-		#var pitch = (angle / (2 * PI)) + octave 
+		var circular_distance = octave * total_radians		
 		var pitch = circular_distance / (2 * PI)
-		print("pitch = ", pitch)
 		
 		if pitch > 0:
 			return pitch

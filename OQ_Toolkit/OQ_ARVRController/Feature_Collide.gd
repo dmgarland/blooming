@@ -20,8 +20,9 @@ func _ready():
 	area = $Area	
 	
 func _physics_process(_dt):
-	body.global_transform = controller.get_palm_transform();
-	area.global_transform = body.global_transform
+	if !collided:
+		body.global_transform = controller.get_palm_transform();
+	area.global_transform = controller.get_palm_transform()
 	var overlapping_bodies = area.get_overlapping_bodies();
 	for b in overlapping_bodies:            
 		if(!collided):
