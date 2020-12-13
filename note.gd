@@ -19,8 +19,8 @@ func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
 	shape = CSGSphere.new()
 	shape.transform.scaled(Vector3(0.2, 0.2, 0.2))	
-	shape.rings = 8
-	shape.radial_segments = 16
+	shape.rings = 6
+	shape.radial_segments = 12
 	var material = SpatialMaterial.new()
 	shape.material = material
 	player = AudioStreamPlayer3D.new()

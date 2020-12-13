@@ -11,6 +11,7 @@ var OCTAVES = 8.0
 var SPIRAL_HEIGHT = 1.5
 var OCTAVE_HEIGHT = SPIRAL_HEIGHT / OCTAVES
 var helix
+var total_radians = OCTAVES * 2 * PI
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,14 +34,14 @@ func connectCollider(c):
 var noteOn = false
 var note = null;
 
-func handleCollideStart(with, controller):
-	note = playNote(getPitchFor(controller), controller.translation, controller.sound)
+func handleCollideStart(with, body):
+	note = playNote(getPitchFor(body), body.translation, body.sound)
 	
 func handleColliding(with, body):
 	if(note):
 		note.player.pitch_scale = getPitchFor(body)
 		
-func handleCollideEnd(with, controller):
+func handleCollideEnd(with, body):
 	pass
 	#if(note):
 	#	remove_child(note)
@@ -58,21 +59,13 @@ func playNote(pitch, origin, sound):
 	return note
 	
 func getPitchFor(body):
-	var x = body.translation.x
 	var y = body.translation.y
-	var z = body.translation.z		
-	if x != 0:
-		var angle = atan2(z, x)
-		if origin.z > z:
-			angle += PI * 2
-			
-		var rely = y - helix.translation.y	
-		var total_radians = OCTAVES * 2 * PI
-		var octave = (rely / SPIRAL_HEIGHT) 
-		var circular_distance = octave * total_radians		
-		var pitch = circular_distance / (2 * PI)
-		
-		if pitch > 0:
-			return pitch
-			
+	var rely = y - helix.translation.y
+	var octave = (rely / SPIRAL_HEIGHT) 
+	var circular_distance = octave * total_radians
+	var pitch = circular_distance / (2 * PI)
+	print(pitch)
+	if pitch > 0:
+		return pitch
+
 	return 1.0
