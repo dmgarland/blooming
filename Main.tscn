@@ -25,7 +25,7 @@ Note = ExtResource( 2 )
 stream = ExtResource( 7 )
 doppler_tracking = 2
 
-[node name="Collision" parent="OQ_ARVROrigin/OQ_LeftController" instance=ExtResource( 10 )]
+[node name="Collide" parent="OQ_ARVROrigin/OQ_LeftController" instance=ExtResource( 10 )]
 
 [node name="OQ_RightController" parent="OQ_ARVROrigin" instance=ExtResource( 3 )]
 
@@ -33,7 +33,7 @@ doppler_tracking = 2
 stream = ExtResource( 8 )
 doppler_tracking = 2
 
-[node name="Collision" parent="OQ_ARVROrigin/OQ_RightController" instance=ExtResource( 10 )]
+[node name="Collide" parent="OQ_ARVROrigin/OQ_RightController" instance=ExtResource( 10 )]
 
 [node name="CSGSphere" type="CSGSphere" parent="OQ_ARVROrigin"]
 transform = Transform( 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0 )

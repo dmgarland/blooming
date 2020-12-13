@@ -16,8 +16,8 @@ var helix
 func _ready():
 	r.randomize()		
 	vr.initialize()
-	connectCollider($OQ_ARVROrigin/OQ_LeftController/Collision)
-	connectCollider($OQ_ARVROrigin/OQ_RightController/Collision)
+	connectCollider($OQ_ARVROrigin/OQ_LeftController/Collide)
+	connectCollider($OQ_ARVROrigin/OQ_RightController/Collide)
 	helix  = $OQ_ARVROrigin/Helix
 	
 func connectCollider(c):
@@ -31,7 +31,7 @@ func handleCollideStart(with, controller):
 	noteOn = true
 	controller.get_child(0).play()
 	
-func handleColliding(with, controller):
+func handleColliding(controller):
 	if(noteOn):
 		var x = controller.translation.x
 		var y = controller.translation.y
@@ -53,7 +53,7 @@ func handleColliding(with, controller):
 			if pitch > 0:
 			  controller.get_child(0).pitch_scale = pitch
 		
-func handleCollideEnd(controller):
+func handleCollideEnd(with, controller):
 	noteOn = false
 	
 func playNote(index):

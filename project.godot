@@ -38,6 +38,10 @@ vr="*res://OQ_Toolkit/vr_autoload.gd"
 
 singletons=[ "res://addons/godot_ovrmobile/godot_ovrmobile.gdnlib" ]
 
+[physics]
+
+3d/smooth_trimesh_collision=true
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
