@@ -17,5 +17,12 @@ contact_monitor = true
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
 transform = Transform( 0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0 )
 shape = SubResource( 1 )
+
+[node name="Area" type="Area" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+transform = Transform( 0.04, 0, 0, 0, 0.04, 0, 0, 0, 0.04, 0, 0, 0 )
+shape = SubResource( 1 )
 [connection signal="body_entered" from="RigidBody" to="." method="_on_GrabArea_body_entered"]
-[connection signal="body_exited" from="RigidBody" to="." method="_on_GrabArea_body_exited"]

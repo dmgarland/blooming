@@ -1,6 +1,7 @@
 extends Spatial
 
-var body : RigidBody = null;
+var body: RigidBody = null;
+var area: Area = null; 
 var controller : ARVRController = null;
 
 signal oq_collision_started;
@@ -16,24 +17,22 @@ func _ready():
 	if (not controller is ARVRController):
 		vr.log_error(" in Feature_Collide: parent not ARVRController.");
 	body = $RigidBody;
-	
+	area = $Area	
 	
 func _physics_process(_dt):
 	body.global_transform = controller.get_palm_transform();
+	area.global_transform = body.global_transform
+	var overlapping_bodies = area.get_overlapping_bodies();
+	for b in overlapping_bodies:            
+		if(!collided):
+			collided = true			
+			emit_signal("oq_collision_started", body, controller)		
+			
+	if(overlapping_bodies.size() == 0):		
+		if(collided):
+			emit_signal("oq_collision_ended", body, controller)
+			collided = false
 	
+func _on_GrabArea_body_entered(body):	
 	if(collided):
-		emit_signal("oq_colliding", controller)
-		
-func _on_GrabArea_body_entered(body):
-	print('body entered')
-	if(!collided):
-		emit_signal("oq_collision_started", body, controller)		
-		collided = true
-
-
-func _on_GrabArea_body_exited(body):
-	print('body exited')
-	if(collided):
-		emit_signal("oq_collision_ended", body, controller)
-		collided = false
-	
+		emit_signal("oq_colliding", body, controller)				

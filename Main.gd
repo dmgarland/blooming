@@ -28,10 +28,11 @@ func connectCollider(c):
 var noteOn = false
 
 func handleCollideStart(with, controller):
-	noteOn = true
-	controller.get_child(0).play()
+	if(!noteOn):
+		noteOn = true
+		controller.get_child(0).play()
 	
-func handleColliding(controller):
+func handleColliding(with, controller):
 	if(noteOn):
 		var x = controller.translation.x
 		var y = controller.translation.y
@@ -47,7 +48,7 @@ func handleColliding(controller):
 			var circular_distance = octave * total_radians
 			#var octave = floor((rely) / OCTAVE_HEIGHT)				
 			#var pitch = (angle / (2 * PI)) + octave 
-			var pitch = circular_distance / (2 * PI) - 2
+			var pitch = circular_distance / (2 * PI)
 			print("pitch = ", pitch)
 			
 			if pitch > 0:
