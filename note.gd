@@ -12,10 +12,12 @@ var index
 var targetRadius = 0
 var targetColour = Color(0, 0, 0, 1)
 var timer
+var origin: Vector3 = Vector3(0,0,0);
 
 func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
 	shape = CSGSphere.new()
+	shape.transform.scaled(Vector3(0.2, 0.2, 0.2))	
 	shape.rings = 8
 	shape.radial_segments = 16
 	var material = SpatialMaterial.new()
@@ -41,8 +43,8 @@ func _ready():
 	player.bus = name
 	#player.stream = load(samples[randi() % samples.size()])	
 	player.stream = load(samples[clamp(index - 1, 0, samples.size() - 1)])
-	player.pitch_scale = pitch
-	shape.translate(Vector3(pitch, pitch, pitch * 2))
+	player.pitch_scale = pitch	
+	shape.translate(Vector3(origin.x + pitch, origin.y + pitch, origin.z + pitch * 2))
 	
 	player.connect("finished", self, "on_finished")
 	
@@ -60,11 +62,12 @@ func _ready():
 	
 func on_finished():
 	yield(get_tree().create_timer(r.randf_range(0.5, 5.0)), "timeout")
-	var pitch_adjustment = r.randf_range(-0.1, 0.1)
-	shape.translate(Vector3(-distance + pitch_adjustment, pitch_adjustment, pitch_adjustment))
-	distance = 0
-	player.pitch_scale += pitch_adjustment
-	player.play()
+	self.queue_free()
+	#var pitch_adjustment = r.randf_range(-0.1, 0.1)
+	#shape.translate(Vector3(-distance + pitch_adjustment, pitch_adjustment, pitch_adjustment))
+	#distance = 0
+	#player.pitch_scale += pitch_adjustment
+	#player.play()
 	
 func measureFrequencies():
 	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)

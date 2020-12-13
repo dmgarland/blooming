@@ -26,48 +26,50 @@ func connectCollider(c):
 	c.connect("oq_collision_ended", self, "handleCollideEnd")
 
 var noteOn = false
+var note = null;
 
 func handleCollideStart(with, controller):
-	if(!noteOn):
-		noteOn = true
-		controller.get_child(0).play()
+	note = playNote(getPitchFor(controller), controller.translation)
 	
 func handleColliding(with, controller):
-	if(noteOn):
-		var x = controller.translation.x
-		var y = controller.translation.y
-		var z = controller.translation.z		
-		if x != 0:
-			var angle = atan2(z, x)
-			if origin.z > z:
-				angle += PI * 2
-				
-			var rely = y - helix.translation.y	
-			var total_radians = OCTAVES * 2 * PI
-			var octave = (rely / SPIRAL_HEIGHT) 
-			var circular_distance = octave * total_radians
-			#var octave = floor((rely) / OCTAVE_HEIGHT)				
-			#var pitch = (angle / (2 * PI)) + octave 
-			var pitch = circular_distance / (2 * PI)
-			print("pitch = ", pitch)
-			
-			if pitch > 0:
-			  controller.get_child(0).pitch_scale = pitch
+	if(note):
+		note.player.pitch_scale = getPitchFor(controller)
 		
 func handleCollideEnd(with, controller):
-	noteOn = false
+	pass
+	#if(note):
+	#	remove_child(note)
 	
-func playNote(index):
+func playNote(pitch, origin):
 	notes += 1
 	var randPitch = r.randf_range(-1.5, 1.5)
-	
 	var note = Note.instance()
 	note.r = r
-	note.pitch = basePitch + randPitch
-	note.index = index
-	#add_child(note)
+	note.pitch = pitch
+	note.index = notes
+	note.origin = origin
 	call_deferred("add_child", note)
+	return note
 	
-
-func _physics_process(delta):	
-	pass
+func getPitchFor(controller):
+	var x = controller.translation.x
+	var y = controller.translation.y
+	var z = controller.translation.z		
+	if x != 0:
+		var angle = atan2(z, x)
+		if origin.z > z:
+			angle += PI * 2
+			
+		var rely = y - helix.translation.y	
+		var total_radians = OCTAVES * 2 * PI
+		var octave = (rely / SPIRAL_HEIGHT) 
+		var circular_distance = octave * total_radians
+		#var octave = floor((rely) / OCTAVE_HEIGHT)				
+		#var pitch = (angle / (2 * PI)) + octave 
+		var pitch = circular_distance / (2 * PI)
+		print("pitch = ", pitch)
+		
+		if pitch > 0:
+			return pitch
+			
+	return 1.0
