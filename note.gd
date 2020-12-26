@@ -79,10 +79,10 @@ func measureFrequencies():
 	targetRadius = magnitude.x * 100	
 	targetColour = Color(bass.x * 100.0, mid.x * 100.0, top.x * 100.0, 0.7)
 	
-func setColour():	
-	var ir = (targetColour.r - shape.material.albedo_color.r) * 0.2 + shape.material.albedo_color.r
-	var ig = (targetColour.g - shape.material.albedo_color.g) * 0.2 + shape.material.albedo_color.g
-	var ib = (targetColour.b - shape.material.albedo_color.b) * 0.2 + shape.material.albedo_color.b
+func setColour(delta):	
+	var ir = (targetColour.r - shape.material.albedo_color.r) * delta + shape.material.albedo_color.r
+	var ig = (targetColour.g - shape.material.albedo_color.g) * delta + shape.material.albedo_color.g
+	var ib = (targetColour.b - shape.material.albedo_color.b) * delta + shape.material.albedo_color.b
 	shape.material.albedo_color = Color(ir, ig, ib, 0.7)
 	
 func setPosition(delta):
@@ -96,7 +96,7 @@ func setRadius():
 		shape.radius = interpolator
 	
 func _process(delta):	
-	setColour()		
+	setColour(delta)		
 	setPosition(delta)
 	setRadius()
 	
