@@ -63,7 +63,7 @@ func _ready():
 	player.play()
 	
 func on_finished():
-	yield(get_tree().create_timer(r.randf_range(0.5, 5.0)), "timeout")
+	#yield(get_tree().create_timer(r.randf_range(0.5, 5.0)), "timeout")
 	self.queue_free()
 	#var pitch_adjustment = r.randf_range(-0.1, 0.1)
 	#shape.translate(Vector3(-distance + pitch_adjustment, pitch_adjustment, pitch_adjustment))
