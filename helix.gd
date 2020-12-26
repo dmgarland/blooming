@@ -4,7 +4,8 @@ extends MeshInstance
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-
+var EQUAL_TEMPERAMENT_INTERVAL = (2 * PI) / 12
+var scale_interval = EQUAL_TEMPERAMENT_INTERVAL
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +20,8 @@ func _ready():
 #		normals.append(vertex.normalized())
 	var rings = 50
 	var radial_segments = 50
-	var height = 1.5
+	var height = get_child(0).get_aabb().size.y
+	print("helix height is ", height)
 	var octaves = 8.0
 	var radius = 0.5
 	var thisrow = 0
@@ -27,19 +29,23 @@ func _ready():
 	var point = 0
 	var octave_height = height / octaves
 	
- # Loop over rings.	
+	# Loop over rings.	
 	for i in range(octaves):
 		var t = 0
-		while t < (PI * 2):			
+		while t < (PI * 2):
 			var y = ((t / (2 * PI)) * octave_height) + (i * octave_height)
 			var x = cos(t)
-			var z = sin(t)			
-			var vert = Vector3(x * radius, y, z * radius)			
+			var z = sin(t)
+			var vert = Vector3(x * radius, y, z * radius)
 			vertices.append(vert)
-			normals.append(vert.normalized())
-			#uvs.append(Vector2(u, v))
+			normals.append(vert.normalized())	
 			point += 1
-			t += 0.05
+			t += scale_interval
+			var notch = CSGSphere.new()
+			notch.radius = 0.05
+			notch.translate(vert) 
+			add_child(notch)
+			
 			# Create triangles in ring using indices.
 			if t > 0:
 				indices.append(prevrow + t - 1)
@@ -52,13 +58,13 @@ func _ready():
 
 	prevrow = thisrow
 	thisrow = point			
-	var arrays = []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
+	#var arrays = []
+	#arrays.resize(Mesh.ARRAY_MAX)
+	#arrays[Mesh.ARRAY_VERTEX] = vertices
 	#arrays[Mesh.ARRAY_TEX_UV] = uvs
-	arrays[Mesh.ARRAY_NORMAL] = normals
+	#arrays[Mesh.ARRAY_NORMAL] = normals
 	#arrays[Mesh.ARRAY_INDEX] = indices
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)	
+	#add_surface_from_arrays(Mesh.PRIMITIVE_LINES, arrays)	
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -17,8 +17,8 @@ var total_radians = OCTAVES * 2 * PI
 func _ready():
 	r.randomize()		
 	vr.initialize()
-	connectCollider($OQ_ARVROrigin/OQ_LeftController/Collide)
-	connectCollider($OQ_ARVROrigin/OQ_RightController/Collide)
+	connectCollider($OQ_ARVROrigin/LeftCollide)
+	connectCollider($OQ_ARVROrigin/RightCollide)
 	helix  = $OQ_ARVROrigin/Helix
 	setDefaults()
 	
@@ -34,14 +34,14 @@ func connectCollider(c):
 var noteOn = false
 var note = null;
 
-func handleCollideStart(with, body):
-	note = playNote(getPitchFor(body), body.translation, body.sound)
+func handleCollideStart(body, controller):
+	note = playNote(getPitchFor(body), body.translation, controller.sound)
 	
-func handleColliding(with, body):
+func handleColliding(body, controller):
 	if(note):
 		note.player.pitch_scale = getPitchFor(body)
 		
-func handleCollideEnd(with, body):
+func handleCollideEnd(body, controller):
 	pass
 	#if(note):
 	#	remove_child(note)
