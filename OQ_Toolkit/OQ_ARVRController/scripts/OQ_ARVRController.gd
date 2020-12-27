@@ -9,8 +9,6 @@ export var autoload_model = true;
 export var hand_pinch_to_axis = false;
 export var hand_pinch_to_button = true;
 
-export var sound: String = '';
-
 var is_hand = false; # this will be updated in the autoload_model
 
 # used for the vr simulation

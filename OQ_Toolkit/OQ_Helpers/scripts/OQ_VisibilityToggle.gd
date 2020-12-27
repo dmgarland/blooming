@@ -1,7 +1,7 @@
 # Simple visibility toggle on button press
 extends Spatial
 
-export(vr.BUTTON) var toggle_button = vr.BUTTON.Y;
+export(vr.BUTTON) var toggle_button = vr.BUTTON.ENTER;
 
 # we have this separate to see it in the editor but
 # have it hidden on actual start

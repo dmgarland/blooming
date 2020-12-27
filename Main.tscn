@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://Note.tscn" type="PackedScene" id=2]
@@ -6,8 +6,12 @@
 [ext_resource path="res://OQ_Toolkit/OQ_LeftController.tscn" type="PackedScene" id=4]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRCamera.tscn" type="PackedScene" id=5]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVROrigin.tscn" type="PackedScene" id=6]
+[ext_resource path="res://OQ_Toolkit/OQ_UI2D/OQ_UI2DCanvas.tscn" type="PackedScene" id=7]
+[ext_resource path="res://OQ_Toolkit/OQ_Helpers/OQ_VisibilityToggle.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Helix.tscn" type="PackedScene" id=9]
 [ext_resource path="res://OQ_Toolkit/OQ_ARVRController/Feature_Collide.tscn" type="PackedScene" id=10]
+[ext_resource path="res://ui.gd" type="Script" id=11]
+[ext_resource path="res://OQ_Toolkit/OQ_ARVRController/Feature_UIRayCast.tscn" type="PackedScene" id=12]
 
 [node name="Main" type="Node"]
 script = ExtResource( 1 )
@@ -19,11 +23,94 @@ Note = ExtResource( 2 )
 
 [node name="OQ_LeftController" parent="OQ_ARVROrigin" instance=ExtResource( 4 )]
 
+[node name="OQ_VisibilityToggle" parent="OQ_ARVROrigin/OQ_LeftController" instance=ExtResource( 8 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1 )
+invisible_on_start = true
+
+[node name="OQ_UI2DCanvas" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle" instance=ExtResource( 7 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+
+[node name="Settings" type="ReferenceRect" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas"]
+margin_right = 671.0
+margin_bottom = 443.0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="RichTextLabel" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings"]
+margin_right = 670.0
+margin_bottom = 28.0
+bbcode_enabled = true
+bbcode_text = "[u][b][center]Menu[/center][/b][/u]"
+text = "Menu"
+fit_content_height = true
+
+[node name="TimbreSettings" type="GridContainer" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings"]
+margin_top = 40.0
+margin_right = 670.0
+margin_bottom = 74.0
+hint_tooltip = "Change the sample played when this controller plays a note"
+size_flags_horizontal = 0
+columns = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Blank" type="Label" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_right = 220.0
+margin_bottom = 14.0
+
+[node name="LeftControllerLabel" type="Label" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_left = 224.0
+margin_right = 444.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Left Controller"
+align = 1
+
+[node name="RightControllerLabel" type="Label" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_left = 448.0
+margin_right = 668.0
+margin_bottom = 14.0
+size_flags_horizontal = 3
+size_flags_vertical = 6
+text = "Right Controller"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timbre" type="Label" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_top = 18.0
+margin_right = 220.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+text = "Timbre
+"
+
+[node name="LeftTimbre" type="OptionButton" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_left = 224.0
+margin_top = 18.0
+margin_right = 444.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+
+[node name="RightTimbre" type="OptionButton" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings"]
+margin_left = 448.0
+margin_top = 18.0
+margin_right = 668.0
+margin_bottom = 49.0
+size_flags_horizontal = 3
+
 [node name="LeftCollide" parent="OQ_ARVROrigin" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 1.5, -0.5 )
 controller_name = "OQ_LeftController"
 
 [node name="OQ_RightController" parent="OQ_ARVROrigin" instance=ExtResource( 3 )]
+
+[node name="Feature_UIRayCast" parent="OQ_ARVROrigin/OQ_RightController" instance=ExtResource( 12 )]
 
 [node name="RightCollide" parent="OQ_ARVROrigin" instance=ExtResource( 10 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 1.5, -0.5 )
@@ -39,3 +126,5 @@ smooth_faces = false
 
 [node name="Helix" parent="OQ_ARVROrigin" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.5, 0 )
+[connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/LeftTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_LeftTimbre_item_selected"]
+[connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/RightTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_RightTimbre_item_selected"]

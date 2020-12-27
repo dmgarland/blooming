@@ -20,11 +20,6 @@ func _ready():
 	connectCollider($OQ_ARVROrigin/LeftCollide)
 	connectCollider($OQ_ARVROrigin/RightCollide)
 	helix  = $OQ_ARVROrigin/Helix
-	setDefaults()
-	
-func setDefaults():
-	$OQ_ARVROrigin/OQ_LeftController.sound = 'res://bowed.wav'
-	$OQ_ARVROrigin/OQ_RightController.sound = 'res://bell.wav'
 	
 func connectCollider(c):
 	c.connect("oq_collision_started", self, "handleCollideStart")
@@ -35,7 +30,7 @@ var noteOn = false
 var note = null;
 
 func handleCollideStart(body, controller):
-	note = playNote(getPitchFor(body), body.translation, controller.sound)
+	note = playNote(getPitchFor(body), body.translation, Settings.settings[controller.name]['sample'])
 	
 func handleColliding(body, controller):
 	if(note):

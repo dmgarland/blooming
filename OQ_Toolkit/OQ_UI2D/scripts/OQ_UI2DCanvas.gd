@@ -66,7 +66,7 @@ func _ready():
 	ui_control.visible = true; # set visible here as it might was set invisible for editing multiple controls
 	
 	ui_collisionshape = $UIArea/UICollisionShape
-	
+
 	
 func _editor_update_preview():
 	var preview_node = ui_control.duplicate(DUPLICATE_USE_INSTANCING);

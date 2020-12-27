@@ -7,7 +7,6 @@ var pitch
 var bus
 var player
 var distance = 0
-var samples = ['res://bowed.wav', 'res://bell.wav', 'res://bass.wav']
 var index
 var targetRadius = 0
 var targetColour = Color(0, 0, 0, 1)
