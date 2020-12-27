@@ -1,6 +1,6 @@
 extends Node
 
-var shape
+var shape: CSGShape
 var spectrum
 var r
 var pitch
@@ -14,11 +14,11 @@ var targetColour = Color(0, 0, 0, 1)
 var timer
 var origin: Vector3 = Vector3(0,0,0);
 var sample;
+var sample_length;
 
 func _ready():
 	#print("Ready bus count = %s" % AudioServer.bus_count)	
-	shape = CSGSphere.new()
-	shape.transform.scaled(Vector3(0.2, 0.2, 0.2))	
+	shape = CSGSphere.new()	
 	shape.rings = 6
 	shape.radial_segments = 12
 	var material = SpatialMaterial.new()
@@ -45,8 +45,9 @@ func _ready():
 	#player.stream = load(samples[randi() % samples.size()])	
 	#player.stream = load(samples[clamp(index - 1, 0, samples.size() - 1)])
 	player.stream = load(sample)
+	sample_length = player.stream.get_length()	
 	player.pitch_scale = pitch	
-	shape.translate(Vector3(origin.x + pitch, origin.y + pitch, origin.z + pitch * 2))
+	shape.translate(origin)
 	
 	player.connect("finished", self, "on_finished")
 	
@@ -63,20 +64,21 @@ func _ready():
 	player.play()
 	
 func on_finished():
-	#yield(get_tree().create_timer(r.randf_range(0.5, 5.0)), "timeout")
+	# if loop:
 	self.queue_free()
-	#var pitch_adjustment = r.randf_range(-0.1, 0.1)
-	#shape.translate(Vector3(-distance + pitch_adjustment, pitch_adjustment, pitch_adjustment))
-	#distance = 0
-	#player.pitch_scale += pitch_adjustment
-	#player.play()
+	return
+	# else
+	yield(get_tree().create_timer(r.randf_range(0.5, 5.0)), "timeout")
+	var pitch_adjustment = r.randf_range(-0.1, 0.1)	
+	player.pitch_scale += pitch_adjustment
+	player.play()
 	
 func measureFrequencies():
 	var magnitude = spectrum.get_magnitude_for_frequency_range(20, 20000)
 	var bass = spectrum.get_magnitude_for_frequency_range(20, 1000)
 	var mid = spectrum.get_magnitude_for_frequency_range(1001, 2000)
 	var top = spectrum.get_magnitude_for_frequency_range(2001, 20000)	
-	targetRadius = magnitude.x * 100	
+	targetRadius = magnitude.x * 50	
 	targetColour = Color(bass.x * 100.0, mid.x * 100.0, top.x * 100.0, 0.7)
 	
 func setColour(delta):	
@@ -84,11 +86,19 @@ func setColour(delta):
 	var ig = (targetColour.g - shape.material.albedo_color.g) * delta + shape.material.albedo_color.g
 	var ib = (targetColour.b - shape.material.albedo_color.b) * delta + shape.material.albedo_color.b
 	shape.material.albedo_color = Color(ir, ig, ib, 0.7)
+
+func percentageThroughSample():
+	return player.get_playback_position() / sample_length
 	
 func setPosition(delta):
-	var offset = player.get_playback_position() * delta / 2
-	distance += offset	
-	shape.translate(Vector3(offset, 0, 0))
+	#print(percentageThroughSample())
+	#var offset = percentageThroughSample() * (2 * PI)
+	var offset = player.get_playback_position()
+	var currentPosition = shape.transform.origin
+	var targetPosition = Vector3(sin(offset) * 10, currentPosition.y, cos(offset) * 10)
+	var interpolator = (targetPosition - currentPosition) * delta 
+	print(currentPosition, targetPosition, interpolator)
+	shape.translate(interpolator)
 	
 func setRadius():
 	var interpolator = (targetRadius - shape.radius) * 0.2 + shape.radius	

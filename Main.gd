@@ -53,7 +53,7 @@ func playNote(pitch, origin, sound):
 	note.r = r
 	note.pitch = pitch
 	note.index = notes
-	note.origin = origin
+	note.origin = Vector3(0, pitch, 10)
 	note.sample = sound
 	call_deferred("add_child", note)
 	return note
