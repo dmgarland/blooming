@@ -44,10 +44,8 @@ func _integrate_forces(state):
 
 func _physics_process(delta):
 	if(vr.button_just_pressed(trigger_button)):
-		print('pressed')
 		pressed = true
 	if(vr.button_just_released(trigger_button)):
-		print('released')
 		pressed = false
 		if playing:
 			emit_signal("oq_collision_ended", self, controller)

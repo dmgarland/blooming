@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/synth_pad.wav-480710e18152c997caf8aaa182ac5053.sample"
+
+[deps]
+
+source_file="res://samples/synth_pad.wav"
+dest_files=[ "res://.import/synth_pad.wav-480710e18152c997caf8aaa182ac5053.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

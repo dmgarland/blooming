@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/bell.wav-0148c22aa2a557a2dfa74e56dee22b31.sample"
+path="res://.import/ebow.wav-0992ef298d797db4917657ebef31e4ed.sample"
 
 [deps]
 
-source_file="res://bell.wav"
-dest_files=[ "res://.import/bell.wav-0148c22aa2a557a2dfa74e56dee22b31.sample" ]
+source_file="res://samples/ebow.wav"
+dest_files=[ "res://.import/ebow.wav-0992ef298d797db4917657ebef31e4ed.sample" ]
 
 [params]
 

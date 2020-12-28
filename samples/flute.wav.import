@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/bowed.wav-22fc54a2d48b947510601a1fe6004a1d.sample"
+path="res://.import/flute.wav-850fa3ddd4bd4ea14699eea2a8e9d0be.sample"
 
 [deps]
 
-source_file="res://bowed.wav"
-dest_files=[ "res://.import/bowed.wav-22fc54a2d48b947510601a1fe6004a1d.sample" ]
+source_file="res://samples/flute.wav"
+dest_files=[ "res://.import/flute.wav-850fa3ddd4bd4ea14699eea2a8e9d0be.sample" ]
 
 [params]
 

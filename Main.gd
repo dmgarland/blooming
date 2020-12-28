@@ -1,17 +1,12 @@
 extends Node
 export (PackedScene) var Note
 var r = RandomNumberGenerator.new()
-var movementOffset = 0.2
-var cameraAngle = 0
-var maxNotes = 12
-var notes = 0
-var basePitch = 0
-var origin = Vector3(0, 0, 0)
 var OCTAVES = 8.0
-var SPIRAL_HEIGHT = 1.5
+var SPIRAL_HEIGHT = 6.666666667 * 0.25
 var OCTAVE_HEIGHT = SPIRAL_HEIGHT / OCTAVES
 var helix
 var total_radians = OCTAVES * 2 * PI
+var total_notes = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,38 +14,38 @@ func _ready():
 	vr.initialize()
 	connectCollider($OQ_ARVROrigin/LeftCollide)
 	connectCollider($OQ_ARVROrigin/RightCollide)
-	helix  = $OQ_ARVROrigin/Helix
+	helix  = $OQ_ARVROrigin/Helix	
 	
 func connectCollider(c):
 	c.connect("oq_collision_started", self, "handleCollideStart")
 	c.connect("oq_colliding", self, "handleColliding")
 	c.connect("oq_collision_ended", self, "handleCollideEnd")
 
-var noteOn = false
-var note = null;
-
 func handleCollideStart(body, controller):
-	note = playNote(getPitchFor(body), body.translation, Settings.settings[controller.name]['sample'])
+	var note = playNote(getPitchFor(body), Settings.settings[controller.name])
+	Settings.settings[controller.name].notes.append(note)
+	return note
 	
-func handleColliding(body, controller):
+func handleColliding(body, controller):	
+	var note = Settings.settings[controller.name].notes.back()
 	if(note):
-		note.player.pitch_scale = getPitchFor(body)
+		note.shift.pitch_scale = getPitchFor(body)
 		
-func handleCollideEnd(body, controller):
+func handleCollideEnd(_body, _controller):
 	pass
 	#if(note):
 	#	remove_child(note)
 	
-func playNote(pitch, origin, sound):
-	notes += 1
-	var randPitch = r.randf_range(-1.5, 1.5)
+func playNote(pitch, settings: Dictionary):	
 	var note = Note.instance()
 	note.r = r
 	note.pitch = pitch
-	note.index = notes
-	note.origin = Vector3(0, pitch, 10)
-	note.sample = sound
+	note.index = total_notes
+	note.origin = Vector3(0, pitch, 10)	
+	note.settings = settings
 	call_deferred("add_child", note)
+	total_notes += 1
+	
 	return note
 	
 func getPitchFor(body):
@@ -59,8 +54,25 @@ func getPitchFor(body):
 	var octave = (rely / SPIRAL_HEIGHT) 
 	var circular_distance = octave * total_radians
 	var pitch = circular_distance / (2 * PI)
-	print(pitch)
+	#print(pitch)
 	if pitch > 0:
 		return pitch
 
 	return 1.0
+
+func _physics_process(_delta):
+	if(vr.button_just_pressed(vr.BUTTON.LEFT_GRIP_TRIGGER)):
+		Settings.settings['OQ_LeftController'].looping = true
+	elif(vr.button_just_released(vr.BUTTON.LEFT_GRIP_TRIGGER)):
+		cancelNotes(Settings.settings['OQ_LeftController'])
+		
+	if(vr.button_just_pressed(vr.BUTTON.RIGHT_GRIP_TRIGGER)):
+		Settings.settings['OQ_RightController'].looping = true
+	elif(vr.button_just_released(vr.BUTTON.RIGHT_GRIP_TRIGGER)):
+		cancelNotes(Settings.settings['OQ_RightController'])
+
+func cancelNotes(settings):
+	settings.looping = false
+	for note in settings.notes:
+		if note.player.stream.loop_mode == AudioStreamSample.LOOP_FORWARD:
+			note.player.stream.loop_mode = AudioStreamSample.LOOP_DISABLED
