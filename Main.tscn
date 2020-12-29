@@ -29,6 +29,8 @@ invisible_on_start = true
 
 [node name="OQ_UI2DCanvas" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle" instance=ExtResource( 7 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1 )
+editor_live_update = false
+transparent = false
 
 [node name="Settings" type="ReferenceRect" parent="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas"]
 margin_right = 671.0
@@ -126,5 +128,6 @@ smooth_faces = false
 
 [node name="Helix" parent="OQ_ARVROrigin" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.5, 0 )
+
 [connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/LeftTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_LeftTimbre_item_selected"]
 [connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/RightTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_RightTimbre_item_selected"]
