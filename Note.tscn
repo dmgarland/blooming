@@ -2,5 +2,7 @@
 
 [ext_resource path="res://note.gd" type="Script" id=1]
 
-[node name="Node" type="Node"]
+[node name="Sphere" type="CSGSphere"]
+radial_segments = 16
+smooth_faces = false
 script = ExtResource( 1 )

@@ -15,7 +15,19 @@ func _ready():
 	connectCollider($OQ_ARVROrigin/LeftCollide)
 	connectCollider($OQ_ARVROrigin/RightCollide)
 	helix  = $OQ_ARVROrigin/Helix	
-	
+	return
+	for i in range(10):
+		var timer = Timer.new()
+		timer.one_shot = true
+		timer.wait_time = i + 1
+		timer.autostart = true
+		timer.connect("timeout", self, "debugnote", [i])
+		self.add_child(timer)
+		
+func debugnote(i):
+	print(total_notes)
+	playNote((i % 3) + 1, Settings.settings['OQ_RightController'])
+	#playNote(5 - i, Settings.settings['OQ_LeftController'])	
 func connectCollider(c):
 	c.connect("oq_collision_started", self, "handleCollideStart")
 	c.connect("oq_colliding", self, "handleColliding")
@@ -39,7 +51,7 @@ func handleCollideEnd(_body, _controller):
 func playNote(pitch, settings: Dictionary):	
 	var note = Note.instance()
 	note.r = r
-	note.pitch = pitch
+	note.pitch = pitch # bug in docs? 
 	note.index = total_notes
 	note.origin = Vector3(0, pitch, 10)	
 	note.settings = settings
@@ -74,5 +86,5 @@ func _physics_process(_delta):
 func cancelNotes(settings):
 	settings.looping = false
 	for note in settings.notes:
-		if note.player.stream.loop_mode == AudioStreamSample.LOOP_FORWARD:
-			note.player.stream.loop_mode = AudioStreamSample.LOOP_DISABLED
+		if note.player.stream.loop_mode == AudioStreamSample.LOOP_FORWARD:			
+			note.player.stream.set_loop_mode(AudioStreamSample.LOOP_DISABLED)

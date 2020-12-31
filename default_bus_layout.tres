@@ -1,3 +1,10 @@
-[gd_resource type="AudioBusLayout" format=2]
+[gd_resource type="AudioBusLayout" load_steps=2 format=2]
+
+[sub_resource type="AudioEffectLimiter" id=1]
+resource_name = "Limiter"
+soft_clip_db = 5.0
+soft_clip_ratio = 18.0
 
 [resource]
+bus/0/effect/0/effect = SubResource( 1 )
+bus/0/effect/0/enabled = true

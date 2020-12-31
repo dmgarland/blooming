@@ -100,9 +100,14 @@ func _ready():
 	
 	ui_raycast_hitmarker.visible = false;
 	ui_raycast_mesh.visible = false;
+	visible = false
 
 # we use the physics process here be in sync with the controller position
 func _physics_process(_dt):
 	if (!active): return;
 	if (!visible): return;
 	_update_raycasts();
+
+
+func _on_OQ_VisibilityToggle_visibility_changed():
+	visible = !visible
