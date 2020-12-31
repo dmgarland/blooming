@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/bell.wav-fcbe9f159094c2b5c5048796e2002ad4.sample"
+path="res://.import/flute_m.01.L.wav-257343ce161b65645969f1c7a1348a1a.sample"
 
 [deps]
 
-source_file="res://samples/bell.wav"
-dest_files=[ "res://.import/bell.wav-fcbe9f159094c2b5c5048796e2002ad4.sample" ]
+source_file="res://samples/flute_m.01.L.wav"
+dest_files=[ "res://.import/flute_m.01.L.wav-257343ce161b65645969f1c7a1348a1a.sample" ]
 
 [params]
 

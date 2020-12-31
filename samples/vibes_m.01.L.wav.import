@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/flute.wav-850fa3ddd4bd4ea14699eea2a8e9d0be.sample"
+path="res://.import/vibes_m.01.L.wav-b83c5a61fcb6fbab1f066ee573fad708.sample"
 
 [deps]
 
-source_file="res://samples/flute.wav"
-dest_files=[ "res://.import/flute.wav-850fa3ddd4bd4ea14699eea2a8e9d0be.sample" ]
+source_file="res://samples/vibes_m.01.L.wav"
+dest_files=[ "res://.import/vibes_m.01.L.wav-b83c5a61fcb6fbab1f066ee573fad708.sample" ]
 
 [params]
 

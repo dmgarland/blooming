@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/synth_pad.wav-480710e18152c997caf8aaa182ac5053.sample"
+path="res://.import/ebow_m.01.L.wav-d20b89438894de1f874206b693532662.sample"
 
 [deps]
 
-source_file="res://samples/synth_pad.wav"
-dest_files=[ "res://.import/synth_pad.wav-480710e18152c997caf8aaa182ac5053.sample" ]
+source_file="res://samples/ebow_m.01.L.wav"
+dest_files=[ "res://.import/ebow_m.01.L.wav-d20b89438894de1f874206b693532662.sample" ]
 
 [params]
 

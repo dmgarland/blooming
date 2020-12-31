@@ -1,14 +1,14 @@
 extends Node
 
 var samples = [	
-	{ 'label': 'Bass', 'resource': 'res://samples/bass.wav', 'loop': { 'begin': 111808, 'end': 130944 }},
-	{ 'label': 'Bell', 'resource': 'res://samples/bell.wav', 'loop': { 'begin': 56688, 'end': 74912 }}, 
-	{ 'label': 'Ebow Guitar', 'resource': 'res://samples/ebow.wav', 'loop': { 'begin': 39520, 'end': 52832 } },
-	{ 'label': 'Flute', 'resource': 'res://samples/flute.wav', 'loop': { 'begin': 9392, 'end': 21632 } },
-	{ 'label': 'Harp', 'resource': 'res://samples/harp.wav', 'loop': { 'begin': 40740, 'end': 55176 } },
-	{ 'label': 'Synth Lead', 'resource': 'res://samples/synth_lead.wav', 'loop': { 'begin': 100016, 'end': 100816 } },
-	{ 'label': 'Synth Pad', 'resource': 'res://samples/synth_pad.wav', 'loop': { 'begin': 146302, 'end': 162048 } },
-	{ 'label': 'Vibes', 'resource': 'res://samples/vibes.wav', 'loop': { 'begin': 71392, 'end': 84192 } },
+	{ 'label': 'Bass', 'resource': 'res://samples/bass_m.01.L.wav', 'loop': { 'begin': 134456, 'end': 139600 }},
+	{ 'label': 'Bell', 'resource': 'res://samples/bell.01.L.wav', 'loop': { 'begin': 59088, 'end': 75776 }}, 
+	{ 'label': 'Ebow Guitar', 'resource': 'res://samples/ebow_m.01.L.wav', 'loop': { 'begin': 39520, 'end': 52832 } },
+	{ 'label': 'Flute', 'resource': 'res://samples/flute_m.01.L.wav', 'loop': { 'begin': 68458, 'end': 68656 } },
+	{ 'label': 'Harp', 'resource': 'res://samples/harp_m.01.L.wav', 'loop': { 'begin': 40740, 'end': 55176 } },
+	{ 'label': 'Synth Lead', 'resource': 'res://samples/synth_lead_m.01.L.wav', 'loop': { 'begin': 60418, 'end': 60820 } },
+	{ 'label': 'Synth Pad', 'resource': 'res://samples/synth_pad_m.01.L.wav', 'loop': { 'begin': 18378, 'end': 98613 } },
+	{ 'label': 'Vibes', 'resource': 'res://samples/vibes_m.01.L.wav', 'loop': { 'begin': 58401, 'end': 59402 } },
 ]
 
 var settings = {

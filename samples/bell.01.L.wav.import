@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/bass.wav-dcb37f71b3852a6f2b047fb273ee5fa9.sample"
+path="res://.import/bell.01.L.wav-2d27fba383635f367ab6eabef6eb6eeb.sample"
 
 [deps]
 
-source_file="res://samples/bass.wav"
-dest_files=[ "res://.import/bass.wav-dcb37f71b3852a6f2b047fb273ee5fa9.sample" ]
+source_file="res://samples/bell.01.L.wav"
+dest_files=[ "res://.import/bell.01.L.wav-2d27fba383635f367ab6eabef6eb6eeb.sample" ]
 
 [params]
 

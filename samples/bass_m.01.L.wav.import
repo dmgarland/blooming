@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/harp.wav-0ae922196bec29208018c0040423db23.sample"
+path="res://.import/bass_m.01.L.wav-a30c09de09d5659835ba79d534ed4c17.sample"
 
 [deps]
 
-source_file="res://samples/harp.wav"
-dest_files=[ "res://.import/harp.wav-0ae922196bec29208018c0040423db23.sample" ]
+source_file="res://samples/bass_m.01.L.wav"
+dest_files=[ "res://.import/bass_m.01.L.wav-a30c09de09d5659835ba79d534ed4c17.sample" ]
 
 [params]
 

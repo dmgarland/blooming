@@ -2,12 +2,12 @@
 
 importer="wav"
 type="AudioStreamSample"
-path="res://.import/ebow.wav-0992ef298d797db4917657ebef31e4ed.sample"
+path="res://.import/harp_m.01.L.wav-af15e92877797f1561024718c16811ef.sample"
 
 [deps]
 
-source_file="res://samples/ebow.wav"
-dest_files=[ "res://.import/ebow.wav-0992ef298d797db4917657ebef31e4ed.sample" ]
+source_file="res://samples/harp_m.01.L.wav"
+dest_files=[ "res://.import/harp_m.01.L.wav-af15e92877797f1561024718c16811ef.sample" ]
 
 [params]
 
