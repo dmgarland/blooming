@@ -131,9 +131,6 @@ smooth_faces = false
 [node name="Helix" parent="OQ_ARVROrigin" instance=ExtResource( 9 )]
 transform = Transform( 1, 0, 0, 0, 0.25, 0, 0, 0, 0.5, 0, 0.5, 0 )
 
-[node name="CSGBox" type="CSGBox" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, -10 )
-
 [connection signal="visibility_changed" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle" to="OQ_ARVROrigin/OQ_RightController/Feature_UIRayCast" method="_on_OQ_VisibilityToggle_visibility_changed"]
 [connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/LeftTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_LeftTimbre_item_selected"]
 [connection signal="item_selected" from="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings/TimbreSettings/RightTimbre" to="OQ_ARVROrigin/OQ_LeftController/OQ_VisibilityToggle/OQ_UI2DCanvas/Settings" method="_on_RightTimbre_item_selected"]
